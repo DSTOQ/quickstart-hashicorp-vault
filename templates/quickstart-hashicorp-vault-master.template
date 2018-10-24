@@ -158,7 +158,7 @@
     "QSS3KeyPrefix": {
       "AllowedPattern": "^[0-9a-zA-Z-/]*$",
       "ConstraintDescription": "Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
-      "Default": "quickstart-hashicorp-vault/",
+      "Default": "",
       "Description": "S3 key prefix for the Quick Start assets. Quick Start key prefix can include numbers, lowercase letters, uppercase letters, hyphens (-), and forward slash (/).",
       "Type": "String"
     },
@@ -320,7 +320,7 @@
                 "Fn::If": [
                   "GovCloudCondition",
                   "s3-us-gov-west-1",
-                  "s3"
+                  "s3-eu-central-1"
                 ]
               }
             }
@@ -380,7 +380,7 @@
                 "Fn::If": [
                   "GovCloudCondition",
                   "s3-us-gov-west-1",
-                  "s3"
+                  "s3-eu-central-1"
                 ]
               }
             }
@@ -458,7 +458,7 @@
                 "Fn::If": [
                   "GovCloudCondition",
                   "s3-us-gov-west-1",
-                  "s3"
+                  "s3-eu-central-1"
                 ]
               }
             }
@@ -479,7 +479,7 @@
                 "Fn::If": [
                   "GovCloudCondition",
                   "s3-us-gov-west-1",
-                  "s3"
+                  "s3-eu-central-1"
                 ]
               }
             }
