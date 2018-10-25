@@ -315,7 +315,7 @@
         },
         "TemplateURL": {
           "Fn::Sub": [
-            "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-aws-vpc/templates/aws-vpc.template", {
+            "https://${QSS3Region}.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-aws-vpc/templates/aws-vpc.template", {
               "QSS3Region": {
                 "Fn::If": [
                   "GovCloudCondition",
@@ -375,7 +375,7 @@
         },
         "TemplateURL": {
           "Fn::Sub": [
-            "https://${QSS3BucketName}.${S3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-linux-bastion/templates/linux-bastion.template", {
+            "https://${S3Region}.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-linux-bastion/templates/linux-bastion.template", {
               "S3Region": {
                 "Fn::If": [
                   "GovCloudCondition",
@@ -453,7 +453,7 @@
         },
         "TemplateURL": {
           "Fn::Sub": [
-            "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-hashicorp-consul/templates/quickstart-hashicorp-consul.template", {
+            "https://${QSS3Region}.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-hashicorp-consul/templates/quickstart-hashicorp-consul.template", {
               "QSS3Region": {
                 "Fn::If": [
                   "GovCloudCondition",
@@ -474,7 +474,7 @@
       "Properties": {
         "TemplateURL": {
           "Fn::Sub": [
-            "https://${QSS3BucketName}.${QSS3Region}.amazonaws.com/${QSS3KeyPrefix}templates/quickstart-hashicorp-vault.template", {
+            "https://${QSS3Region}.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}templates/quickstart-hashicorp-vault.template", {
               "QSS3Region": {
                 "Fn::If": [
                   "GovCloudCondition",

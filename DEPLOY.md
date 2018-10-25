@@ -1,14 +1,40 @@
 # How to deploy a new stack
 
-1. Copy template files to S3 bucket
+1. Generate a EC2 keypair and save private key to `~/.ssh/DSTOQ_KP_1.pem` (it will be used to SSH into vault server via bastion host)
+
+1. Copy template files to S3 bucket and deploy a new stack:
  ```
  ./deploy-s3.sh
  ```
+3. Configure ssh and connect
+Example SSH config is: `./ssh_config.example.txt`.
+It needs to be edited with actual IP addresses and copied to (or merged with the existing one) `~/.ssh/config`
+```shell
+ssh vault1
+```
+4. Init vault (on 1 server)
+```shell
+vault operator init -key-shares=3 -key-threshold=2 # save the output
+```
 
-2. [Open Cloud Formation console](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks?filter=active)
-1. Click "Create Stack" button
-1. Specify an Amazon S3 template URL: 
+5. Unseal vault (on every server)
+```shell
+vault operator unseal # <- unseal key 1
+vault operator unseal # <- unseal key 2
 ```
-http://quickstart-hashicorp-vault.s3.eu-central-1.amazonaws.com/templates/quickstart-hashicorp-vault-master.template
+
+6. Login
+```shell
+vault login token=<root-token>
 ```
-2. Specify a stack name, e.g. `DSTOQ-Vault`
+
+7. Enable transit 
+```shell
+vault secrets enable transit 
+```
+
+8. Enable audit logs:
+```shell
+vault audit enable file file_path=/var/log/vault_audit.logstatus
+```
+

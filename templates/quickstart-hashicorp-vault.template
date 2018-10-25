@@ -104,7 +104,7 @@
         "VaultDownloadURL": {
             "Type": "String",
             "Description": "The URL to download the Vault zip file ",
-            "Default": "https://releases.hashicorp.com/vault/0.10.4/vault_0.10.4_linux_amd64.zip"
+            "Default": "https://releases.hashicorp.com/vault/0.11.4/vault_0.11.4_linux_amd64.zip"
         }
     },
     "Conditions": {
@@ -121,21 +121,6 @@
         "AWSAMIRegionMap": {
             "AMI": {
                 "US1604HVM": "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-20180912"
-            },
-            "ap-northeast-1": {
-                "US1604HVM": "ami-06c43a7df16e8213c"
-            },
-            "ap-northeast-2": {
-                "US1604HVM": "ami-0e0f4ff1154834540"
-            },
-            "ap-south-1": {
-                "US1604HVM": "ami-04ea996e7a3e7ad6b"
-            },
-            "ap-southeast-1": {
-                "US1604HVM": "ami-0eb1f21bbd66347fe"
-            },
-            "ap-southeast-2": {
-                "US1604HVM": "ami-0789a5fb42dcccc10"
             },
             "eu-central-1": {
                 "US1604HVM": "ami-086a09d5b9fa35dc7"
@@ -378,7 +363,7 @@
                             "/etc/awslogs-config-file": {
                                 "source": {
                                     "Fn::Sub": [
-                                        "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/awslogs-config-file",
+                                        "https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/awslogs-config-file",
                                         {
                                             "QSS3BucketName": {
                                                 "Ref": "QSS3BucketName"
@@ -446,7 +431,7 @@
                             "/etc/vault.d/vault.hcl": {
                                 "source": {
                                     "Fn::Sub": [
-                                        "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/vault.hcl",
+                                        "https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/vault.hcl",
                                         {
                                             "QSS3BucketName": {
                                                 "Ref": "QSS3BucketName"
@@ -464,7 +449,7 @@
                             "/etc/systemd/system/vault.service": {
                                 "source": {
                                     "Fn::Sub": [
-                                        "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/vault.service",
+                                        "https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/vault.service",
                                         {
                                             "QSS3BucketName": {
                                                 "Ref": "QSS3BucketName"
@@ -546,7 +531,7 @@
                                 "mkdir -p /opt/vault/policies/ /opt/vault/scripts/ /etc/vault.d/\n",
                                 {
                                     "Fn::Sub": [
-                                        "wget https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-hashicorp-consul/scripts/consul_client_bootstrap.sh\n",
+                                        "wget https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-hashicorp-consul/scripts/consul_client_bootstrap.sh\n",
                                         {
                                             "QSS3BucketName": {
                                                 "Ref": "QSS3BucketName"
@@ -692,7 +677,7 @@
                             "/etc/cron.hourly/cloudwatch-monitoring.sh": {
                                 "source": {
                                     "Fn::Sub": [
-                                        "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/cloudwatch-monitoring.sh",
+                                        "https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/cloudwatch-monitoring.sh",
                                         {
                                             "QSS3BucketName": {
                                                 "Ref": "QSS3BucketName"
@@ -718,7 +703,7 @@
                             "01_run_awslogs_agent_setup.py": {
                                 "command": {
                                     "Fn::Sub": [
-                                        "python /usr/local/awslogs-agent-setup.py -n -r ${Region} -c https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/awslogs-config-file",
+                                        "python /usr/local/awslogs-agent-setup.py -n -r ${Region} -c https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/awslogs-config-file",
                                         {
                                             "Region": {
                                                 "Ref": "AWS::Region"
@@ -757,7 +742,7 @@
                             "/etc/vault.d/vault.hcl": {
                                 "source": {
                                     "Fn::Sub": [
-                                        "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/vault.hcl",
+                                        "https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/vault.hcl",
                                         {
                                             "QSS3BucketName": {
                                                 "Ref": "QSS3BucketName"
@@ -775,7 +760,7 @@
                             "/etc/systemd/system/vault.service": {
                                 "source": {
                                     "Fn::Sub": [
-                                        "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/vault.service",
+                                        "https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/vault.service",
                                         {
                                             "QSS3BucketName": {
                                                 "Ref": "QSS3BucketName"
@@ -857,7 +842,7 @@
                                 "mkdir -p /opt/vault/policies/ /opt/vault/scripts/ /etc/vault.d/\n",
                                 {
                                     "Fn::Sub": [
-                                        "wget https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-hashicorp-consul/scripts/consul_client_bootstrap.sh\n",
+                                        "wget https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}submodules/quickstart-hashicorp-consul/scripts/consul_client_bootstrap.sh\n",
                                         {
                                             "QSS3BucketName": {
                                                 "Ref": "QSS3BucketName"

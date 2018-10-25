@@ -1,0 +1,40 @@
+Host bastion
+  User ubuntu
+  HostName 18.185.52.74
+  IdentitiesOnly yes 
+  IdentityFile ~/.ssh/DSTOQ_KP_1.pem
+
+Host vault1
+  User ubuntu
+  HostName 10.0.26.211
+  IdentitiesOnly yes 
+  IdentityFile ~/.ssh/DSTOQ_KP_1.pem
+  ProxyCommand ssh -W %h:%p bastion
+
+Host vault2
+  User ubuntu
+  HostName 10.0.49.96
+  IdentitiesOnly yes 
+  IdentityFile ~/.ssh/DSTOQ_KP_1.pem
+  ProxyCommand ssh -W %h:%p bastion
+
+Host consul1
+  User ubuntu
+  HostName 10.0.8.74
+  IdentitiesOnly yes 
+  IdentityFile ~/.ssh/DSTOQ_KP_1.pem
+  ProxyCommand ssh -W %h:%p bastion
+
+Host consul2
+  User ubuntu
+  HostName 10.0.38.63
+  IdentitiesOnly yes 
+  IdentityFile ~/.ssh/DSTOQ_KP_1.pem
+  ProxyCommand ssh -W %h:%p bastion
+
+Host consul3
+  User ubuntu
+  HostName 10.0.92.48
+  IdentitiesOnly yes 
+  IdentityFile ~/.ssh/DSTOQ_KP_1.pem
+  ProxyCommand ssh -W %h:%p bastion
