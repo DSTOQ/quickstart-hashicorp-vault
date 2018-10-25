@@ -1,5 +1,5 @@
 ## HashiCorp Vault on the AWS Cloud
-VAULT_VERSION 0.10.4
+VAULT_VERSION 0.11.4
 
 CONSUL_VERSION '1.2.2'
 
