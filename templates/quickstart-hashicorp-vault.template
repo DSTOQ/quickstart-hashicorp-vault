@@ -96,6 +96,12 @@
             "Description": "CIDR Block for the VPC",
             "Type": "String"
         },
+        "VaultAccessCIDR": {
+            "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
+            "ConstraintDescription": "CIDR block parameter must be in the form x.x.x.x/16-28",
+            "Description": "CIDR Block from which access to Vault is enabled.",
+            "Type": "String"
+        },
         "AccessCIDR": {
             "AllowedPattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
             "Description": "The CIDR IP range that is permitted to access Consul Note: a value of 0.0.0.0/0 will allow access from ANY ip address",
@@ -114,6 +120,18 @@
                     "Ref": "AWS::Region"
                 },
                 "us-gov-west-1"
+            ]
+        },
+        "CreateVaultAccessIngress": {
+            "Fn::Not": [
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "VaultAccessCIDR"
+                        },
+                        ""
+                    ]
+                }
             ]
         }
     },
@@ -203,6 +221,22 @@
                         }
                     }
                 ]
+            }
+        },
+        "VaultSecGroupIngressFromVaultAccessCIDR": {
+            "Type": "AWS::EC2::SecurityGroupIngress",
+            "Condition": "CreateVaultAccessIngress",
+            "Properties": {
+                "Description": "Allow access to Vault from IP within VaultAccessCIDR",
+                "CidrIp": {
+                    "Ref": "VaultAccessCIDR"
+                },
+                "FromPort": 8200,
+                "ToPort": 8200,
+                "GroupId": {
+                    "Ref": "AWS::VaultSecGroup"
+                },
+                "IpProtocol": "tcp"
             }
         },
         "Vault1MemoryAlarm": {
