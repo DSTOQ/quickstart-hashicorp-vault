@@ -500,10 +500,13 @@ function prevent_process_snooping() {
 ##################################### End Function Definitions
 
 # Call checkos to ensure platform is Linux
+echo "checkos"
 checkos
 # Verify dependencies are installed.
+echo "verify dependencies"
 verify_dependencies
 # Assuming it is, setup environment variables.
+echo "setup_environment_variables"
 setup_environment_variables
 
 ## set an initial value
@@ -593,6 +596,7 @@ release=$(osrelease)
 # Ubuntu Linux
 if [ "${release}" == "Ubuntu" ]; then
     #Call function for Ubuntu
+    echo "ubuntu_os"
     ubuntu_os
 # AMZN Linux
 elif [ "${release}" == "AMZN" ]; then
@@ -607,7 +611,9 @@ else
     exit 1
 fi
 
+echo "prevent_process_snooping"
 prevent_process_snooping
+echo "request_eip"
 request_eip
 
 echo "Bootstrap complete."

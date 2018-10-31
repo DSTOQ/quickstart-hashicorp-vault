@@ -42,12 +42,17 @@ vault operator unseal # <- unseal key 2
 vault login token=<root-token>
 ```
 
-7. Enable transit 
+7. Enable transit
 ```shell
 vault secrets enable transit 
 ```
 
-8. Enable audit logs:
+8. Enable AWS Auth backend
+```shell
+vault auth enable aws
+```
+
+9. Enable audit logs:
 ```shell
 vault audit enable file file_path=/var/log/vault_audit.logstatus
 ```

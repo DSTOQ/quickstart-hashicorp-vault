@@ -308,7 +308,7 @@
                                 "CONSUL_BOOTSTRAP_FILE=consul_server_bootstrap.sh\n",
                                 "CONSUL_BOOTSTRAP=",
                                 {
-                                    "Fn::Sub": "https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/"
+                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/"
                                 },
                                 "${CONSUL_BOOTSTRAP_FILE}",
                                 "\n",
@@ -385,7 +385,7 @@
                                 "CONSUL_BOOTSTRAP_FILE=consul_client_bootstrap.sh\n",
                                 "CONSUL_BOOTSTRAP=",
                                 {
-                                    "Fn::Sub": "https://s3-eu-central-1.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/"
+                                    "Fn::Sub": "https://s3.amazonaws.com/${QSS3BucketName}/${QSS3KeyPrefix}scripts/"
                                 },
                                 "${CONSUL_BOOTSTRAP_FILE}",
                                 "\n",

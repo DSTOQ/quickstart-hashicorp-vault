@@ -105,7 +105,7 @@
                 "Ubuntu-Server-14.04-LTS-HVM",
                 "Ubuntu-Server-16.04-LTS-HVM"
             ],
-            "Default": "Amazon-Linux-HVM",
+            "Default": "Ubuntu-Server-16.04-LTS-HVM",
             "Description": "The Linux distribution for the AMI to be used for the bastion instances",
             "Type": "String"
         },
@@ -688,7 +688,7 @@
                                                         "Fn::If": [
                                                             "GovCloudCondition",
                                                             "s3-us-gov-west-1",
-                                                            "s3-eu-central-1"
+                                                            "s3"
                                                         ]
                                                     }
                                                 }
