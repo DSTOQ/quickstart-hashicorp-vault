@@ -61,8 +61,12 @@ $ vault audit enable file file_path=/var/log/vault_audit.logstatus
 
 transit.hcl:
 ```hcl
+path "transit/keys/*" {
+  capabilities = ["create", "update", "list", "read"]
+}
+
 path "transit/sign/*" {
-  capabilities = ["read"]
+  capabilities = ["create", "update", "read"]
 }
 ```
 
