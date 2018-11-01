@@ -40,6 +40,11 @@ if [ -n "$VAULT_LOCAL_CONFIG" ]; then
     echo "$VAULT_LOCAL_CONFIG" > "$VAULT_CONFIG_DIR/local.json"
 fi
 
+# If the shared volume is mounted then chown it
+if [ -d "/shared" ]; then
+    chown -R vault:vault /shared || echo "Could not chown /shared (may not have appropriate permissions)"
+fi
+
 # If the user is trying to run Vault directly with some arguments, then
 # pass them to Vault.
 if [ "${1:0:1}" = '-' ]; then
