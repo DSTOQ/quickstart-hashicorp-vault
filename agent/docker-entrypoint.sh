@@ -71,8 +71,6 @@ fi
 # If we are running Vault, make sure it executes as the proper user.
 if [ "$1" = 'vault' ]; then
 
-    chown -R vault:vault /vault/mounted || echo "Could not chown /mounted (may not have appropriate permissions)"
-
     # If the config dir is bind mounted then chown it
     if [ "$(stat -c %u /vault/config)" != "$(id -u vault)" ]; then
         chown -R vault:vault /vault/config || echo "Could not chown /vault/config (may not have appropriate permissions)"
