@@ -33,28 +33,50 @@ vault operator init -key-shares=3 -key-threshold=2
 
 5. Unseal vault (on every vault server)
 ```shell
-vault operator unseal # <- unseal key 1
-vault operator unseal # <- unseal key 2
+$ vault operator unseal # <- unseal key 1
+$ vault operator unseal # <- unseal key 2
 ```
 
 6. Login
 ```shell
-vault login token=<root-token>
+$ vault login token=<root-token>
 ```
 
 7. Enable transit
 ```shell
-vault secrets enable transit 
+$ vault secrets enable transit 
 ```
 
 8. Enable AWS Auth backend
 ```shell
-vault auth enable aws
+$ vault auth enable aws
 ```
 
 9. Enable audit logs:
 ```shell
-vault audit enable file file_path=/var/log/vault_audit.logstatus
+$ vault audit enable file file_path=/var/log/vault_audit.logstatus
+```
+
+10. Create service role with transit policy
+
+transit.hcl:
+```hcl
+path "transit/sign/*" {
+  capabilities = ["read"]
+}
+```
+
+```shell
+$ vault policy write transit ./transit.hcl
+$ vault write -f auth/aws/role/service auth_type=iam max_ttl=15m bound_iam_principal_arn="arn:aws:iam::486690458968:role/dstoq-stg-core-role" policies=transit
+```
+
+11. Create encryption keys
+```shell
+$ vault write transit/keys/sign type=ed25519 exportable=false allow_plaintext_backup=false
+Success! Data written to: transit/keys/sign
+$ vault write transit/keys/funding type=ed25519 exportable=false allow_plaintext_backup=false
+Success! Data written to: transit/keys/funding
 ```
 
 ## How to backup vault state
