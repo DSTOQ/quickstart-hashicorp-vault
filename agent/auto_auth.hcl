@@ -18,6 +18,6 @@ auto_auth {
     
     sink "file" {
         wrap_ttl = "15m" 
-        config = { path = "./token" }
+        config = { path = "/shared/token" }
     }
 }
