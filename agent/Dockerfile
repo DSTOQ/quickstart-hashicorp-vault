@@ -51,7 +51,8 @@ RUN set -eux; \
 # the configuration directory so you can add additional config files in that
 # location.
 
-COPY auto_auth.hcl /vault/auto_auth.hcl
+COPY core_agent.hcl /vault/core_agent.hcl
+COPY core_bootstrap_agent.hcl /vault/core_bootstrap_agent.hcl
 
 RUN mkdir -p /vault/logs && \
     mkdir -p /vault/file && \
